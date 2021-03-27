@@ -1,7 +1,7 @@
 ---
 title: Learn you a docker
 date: "2021-03-27T22:12:03.284Z"
-description: "The docker introduction I wish I had. Learn how to get started by understanding docker, and building and running your first app."
+description: "The docker introduction I wish I had. Learn how to get started by understanding the basics of docker, and building and running your first app."
 ---
 ## _A practical guide, we're not going deep here_
 
