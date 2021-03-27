@@ -11,6 +11,12 @@ module.exports = {
     `gatsby-plugin-image`,
     `gatsby-plugin-netlify-cms`,
     {
+      resolve: `gatsby-plugin-google-adsense`,
+      options: {
+        publisherId: `ca-pub-8404355088424689`
+      },
+    },
+    {
       resolve: `gatsby-source-filesystem`,
       options: {
         path: `${__dirname}/content/blog`,
