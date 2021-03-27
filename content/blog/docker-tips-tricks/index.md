@@ -7,8 +7,7 @@ description: "Now that you've learned how to build and run containers, it's time
 
 In our introductory example we looked at a simple python application. For this, we built a docker image based off of [Ubuntu]() and then added a `RUN` statement to install our python interpreters. This worked well for our example, but lets examine things closer:
 
-`docker run -it ubuntu:18.04o
-`
+`docker run -it ubuntu:18.04`
 
 ``` shell
 learnyouadocker git/master
