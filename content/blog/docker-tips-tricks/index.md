@@ -1,8 +1,9 @@
 ---
 title: Docker series - tips and tricks
 date: "2021-03-27T23:12:03.284Z"
-description: "Now that you've learned how to build and run containers, it's time to get to know the ecosystem and learn some tips and tricks for working with docker."
+description: "Now that you've learned how to build and run containers, it's time to get to know the ecosystem and learn some tips and tricks for working with docker. This covers using pre-built images, mutli staged builds, the dockerignore file and some extra commands from the docker CLI."
 ---
+
 ## Pre-built images
 
 In our introductory example we looked at a simple python application. For this, we built a docker image based off of [Ubuntu]() and then added a `RUN` statement to install our python interpreters. This worked well for our example, but lets examine things closer:
@@ -147,3 +148,95 @@ lazydocker-single-stage   latest    406MB
 ```
 
 With MSBs we achieve a build that is more than 20x smaller than if we did no cleaning up of build-time dependencies, and it's done in a way thats easy to understand and that looks 100000x better than a bunch of rm -rf commands.
+
+
+## .dockerignore
+
+Similar to a .gitignore to make sure you don't commit files you don't need into git history, we have the concept of a dockerignore file to make sure docker does not consider certain files when building images. This is important for 2 important reasons
+1. Managing docker [context](https://docs.docker.com/engine/reference/commandline/build/#extended-description) size
+2. Making sure you aren't copying certain files into your image when you declare a `COPY` directive in your Dockerfile
+
+##### More on "context"
+Remember when we broke down the build command in the first tutorial? `docker build -t my-app .` and we said that the `.` here was the PATH? What we're telling docker here is that this build command should expect to be able to run `COPY` from anything in the directory (or subdirectories) of `.`.
+
+Docker prepares the build by "sending" the context to the docker daemon (the program that actually builds your images):
+
+``` shell
+❯ docker build -t my-app .
+[+] Building 0.4s (9/9) FINISHED
+ => [internal] load build definition from Dockerfile              0.3s
+ => => transferring dockerfile: 37B                               0.1s
+ => [internal] load .dockerignore                                 0.3s
+ => => transferring context: 2B                                   0.1s
+ => [internal] load metadata for docker.io/library/ubuntu:18.04   0.0s
+ => [1/4] FROM docker.io/library/ubuntu:18.04                     0.0s
+ => [internal] load build context                                 0.0s
+ => => transferring context: 28B                                  0.0s
+```
+Look specifically of the last two lines of the output "load build context" and "transferring context: 28B". My example project is very simple with just a main.py file and a Dockerfile, so the build context is very small and this step happens in "0s". But lets consider a slightly more complicated example with nodejs. We're going to be using the [vue-cli](https://github.com/vuejs/vue-cli) template app as an example here:
+
+``` shell
+docker-ignore git/master
+❯ ll
+babel.config.js
+node_modules
+package-lock.json
+package.json
+public
+README.md
+src
+```
+
+Running `vue create docker-ignore` generates the project shown above and runs `npm install` to install the necessary dependencies to run the app, as defined in "package.json". Lets say we wanted to build a production image for this project... we would write a Dockerfile like the one below:
+
+``` Dockerfile
+FROM node:10-alpine
+
+COPY package.json package-lock.json ./
+
+RUN npm install --production
+
+COPY . .
+
+RUN npm run build
+
+# Probably transfer built static files to an nginx container... see the Multi Staged Builds section
+```
+
+Lets build this
+``` shell
+❯ docker build -t docker-ignore .
+ => [internal] load build context     1.4s
+ => => transferring context: 1.71MB   1.3s
+```
+
+Now, this is still a pretty small project, so 1.71MB taking 1.3s to transfer might now be that big of a deal to you, but this number will grow significantly as you work on larger projects. Lets introduce a ".dockerignore" file to the root of the project with the following contents
+
+``` text
+node_modules
+```
+
+And then rebuild
+
+``` shell
+❯ docker build -t docker-ignore .
+ => [internal] load build context     0.0s
+ => => transferring context: 4.66kB   0.0s
+```
+
+This is a big difference and can really streamline your builds. If you're working on a project with docker and notice that your build context looks suspiciously large, take a look at your dockerignore file to see if something might be missing and add it, or add a dockerignore file to the project if there isn't one already.
+
+On top of speeding up your builds, a dockerignore file can be useful to make sure you aren't copying over files that you don't need in the first place (and then having to clean them up in the dockerfile). Looking at the example above, we probably don't need to ship the README file to production! We can avoid this by adding a `RUN rm -rf README.md` to our dockerfile (ugly, bad), or we can simply add "README.md" to the .dockerignore file to make sure it never gets copied over in the first place.
+
+
+## Get to know the docker cli
+
+* Need to see what images you have locally? `docker images`
+* Need to see which containers are running? `docker ps`
+* Need to see how many layers your image has? `docker history <image_tag> | wc -l`
+* Need to stop a running container? `docker stop <container_name>`*Note that container name is different than tag name: container name is assigned on docker run, while tag name is assigned on docker build.*
+
+## Editor integrations
+* VSCode: [docker plugin](https://code.visualstudio.com/docs/containers/overview)
+* Shell [lazy docker](https://code.visualstudio.com/docs/containers/overview)
+* Emacs [docker.el](https://github.com/Silex/docker.el)
