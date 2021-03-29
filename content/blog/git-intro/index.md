@@ -1,5 +1,5 @@
 ---
-title: Git for <del>dummies</del> people who haven't used git before
+title: Git for <del>dummies</del> people who are new to git
 date: "2021-03-29T22:12:03.284Z"
 description: "You're not a dummy. The language used in git is old and unique to git: commit, staged, rebase, bisect, reflog, push, pull? Archaic. But it's the industry standard version control tool, and one that you're going to use every day, so it's probably best to learn it. In this post we will walk through basic concepts and an easy workflow that you can adopt"
 ---
