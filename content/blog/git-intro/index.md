@@ -18,7 +18,7 @@ A crude example
 > git init
 Initialized empty Git repository in /Users/me/code/git-intro/.git/
 ```
-(Take note of the directory created in our project `.git`, we'll be coming back to this later but if you want to check it out you can take a look around `ls -a && cd .git/`)
+(Take note of the directory created in our project `.git`, we'll be coming back to this in a different post but if you want to check it out you can take a look around `ls -a && cd .git/`)
 
 Like the message says, we've just started a git repository with no history. Let's go ahead and create our first commit:
 
@@ -26,7 +26,7 @@ Like the message says, we've just started a git repository with no history. Let'
 touch main.py
 ```
 
-This creates an empty file, and even though the file is empty, it represents a change in our project and so we should be able to "save" this point in our projects history with a commit. But lets check!
+This creates an empty file, and even though the file is empty, it represents a change in our project and so we should be able to "save" this point in our projects history with a commit. But let's check!
 
 > `git status` This is my most used command, I am constantly checking what the status of my git repo.
 
@@ -69,7 +69,7 @@ Changes to be committed:
   (use "git rm --cached <file>..." to unstage)
 	new file:   main.py
 ```
-Again, run git status to see what the state of our project is and you'll notice it's changed. We we run `git add main.py` we are _adding_ main.py to the "staging" area of git. The staging area is reserved for files (or changes) that are ready to be _commited_ to git history.
+Again, run git status to see what the state of our project is and you'll notice it's changed. When we run `git add main.py` we are _adding_ main.py to the "staging" area of git. The staging area is reserved for files (or changes) that are ready to be _commited_ to git history.
 
 The next thing to do is to commit this change to history
 
@@ -86,7 +86,7 @@ On branch main
 nothing to commit, working tree clean
 ```
 
-What my terminal output doesn't show is that when you run `git commit`, this will open the "vi" editor. The editor is a bit special and has "modes". For now lets just focus on getting this commit message done; when vi opens a file you start in "normal" mode (notice that typing characters doesn't actually insert any text?), but we need to get to "insert" mode. While in normal mode, press "i" to enter _insert_ mode and you will be able to _insert_ text as you expect with a normal editor. Write a message that describes what you're trying to save to your history; for something as simple and purposeless as this, "Initial commit" will suffice. Once you've entered your message, press "ESC" to re-enter normal mode. From here type ":wq" or ":x" to save and exit and you should see the terminal output above. And of course we run `git status` again to see where we are.
+What my terminal output doesn't show is that when you run `git commit`, this will open the "vi" editor. The editor is a bit special and has "modes". For now let's just focus on getting this commit message done; when vi opens a file you start in "normal" mode (notice that typing characters doesn't actually insert any text?), but we need to get to "insert" mode. While in normal mode, press "i" to enter _insert_ mode and you will be able to _insert_ text as you expect with a normal editor. Write a message that describes what you're trying to save to your history; for something as simple and purposeless as this, "Initial commit" will suffice. Once you've entered your message, press "ESC" to re-enter normal mode. From here type ":wq" or ":x" to save and exit and you should see the terminal output above. And of course we run `git status` again to see where we are.
 
 Let's modify main.py to print out "Hello world", save and check this in to git.
 
@@ -151,7 +151,7 @@ You've probably noticed that I've rambled on about git without even mentioning g
 If you run `git remote -v` in our project you get an empty output. This is a problem because the reason we write to code is for the github commit tracker, right? Right.
 ![github contributions](contributions.png)
 
-So lets upload this code to github! In the git world we call this _pushing_, we _push_ code when it's ready. Go to github (or whatever git client you like, gitlab, gittea, bitbucket etc. I'll be using github for this post) and figure out how to create an __empty__ repository.
+So let's upload this code to github! In the git world we call this _pushing_, we _push_ code when it's ready. Go to github (or whatever git client you like, gitlab, gittea, bitbucket etc. I'll be using github for this post) and figure out how to create an __empty__ repository.
 ![new repo](new-repo.png)
 
 Once created it should show you your git url, something like https://github.com/me/git-intro.git ... this is going to be the url where our code lives.
@@ -168,7 +168,7 @@ origin	https://github.com/me/git-intro.git (fetch)
 origin	https://github.com/me/git-intro.git (push)
 ```
 
-What we did here is called adding a _remote_, which is what git uses to _push_ and _pull_ code to/from (we'll come back to pull, lets focus on getting our code out there). It is typical for the main place that you're going to push code to to be called the "origin", but you can name this anything you want and you can have many remotes! (This is actually how you deploy with heroku, you have your origin remote where your team can see your code, manage pull-requests etc. and you have a heroku remote so that when it's time to deploy you can run "git push heroku master" and that will upload your code to heroku servers)
+What we did here is called adding a _remote_, which is what git uses to _push_ and _pull_ code to/from (we'll come back to pull, let's focus on getting our code out there). It is typical for the main place that you're going to push code to to be called the "origin", but you can name this anything you want and you can have many remotes! (This is actually how you deploy with heroku, you have your origin remote where your team can see your code, manage pull-requests etc. and you have a heroku remote so that when it's time to deploy you can run "git push heroku master" and that will upload your code to heroku servers)
 
 To upload the code we wrote, or push it, we can now run `git push origin` and when we revisit our repository in github we should see our main.py file and 2(!) commits. It's imporant that you realize that github is keeping all of your commits, it's not just a file server like dropbox or google drive.
 
@@ -181,7 +181,7 @@ If you were to run `git pull` right now you would see a message like "Branch up 
 
 ### Branching: or how teams work in parallel!
 
-You've probably noticed that in all of my shell commands to far you see "git/main" or on yours maybe "git/master". When you initialize a git repository it creates a history with a "master" copy of your project and this will be the "main" copy that all future work derives from.
+You've probably noticed that in all of my shell commands so far you see "git/main" or on yours maybe "git/master". When you initialize a git repository it creates a history with a "master" copy of your project and this will be the "main" copy that all future work derives from.
 
 In a team you are going to have multiple engineers all working on the same project, modifying the same files all trying to get their changes into the main branch that will eventually get deployed to production so that users can start using those changes. But we can't all be commiting directly to the main branch at once (to be honest, we could but that's for a different post). Not only that but your team probably using a feature branch and Pull Request (PR) workflow. Let's look at an example with the project we've been using this entire post.
 
@@ -214,7 +214,7 @@ git-intro git/feat/double*
 ```
 > A quicker way to create and branch and switch to it is `git checkout -b mybranch`
 
-Now lets build out our feature by defining our main function and the double function, then adding some command line argument handling
+Now let's build out our feature by defining our main function and the double function, then adding some command line argument handling
 
 ``` python
 # main.py
@@ -231,7 +231,7 @@ if __name__ == "__main__":
     print(f'Double {num} is {double(num)}')
 ```
 
-And lets write tests for that `double` function!
+And let's write tests for that `double` function!
 
 ``` python
 # test_main.py
@@ -259,7 +259,7 @@ test:
 	python -m unittest discover
 ```
 
-Now lets check our work
+Now let's check our work
 
 ``` shell
 git-intro git/main*
@@ -311,7 +311,7 @@ nothing to commit, working tree clean
 ```
 > `git add .` the "." is saying add everything in the directory that im running this command from. Easier than specifying each file when we're trying to commit more than a few.
 
-> Tip! If you had a `__pycache__` folder when you ran status this is a good opportunity to add a .gitignore, because those are not needed in our git history. Run `echo __pycache__ > .gitignore` and re-run git status to see what's changed. You'll notice that the pycache folder is no longer there, but now the .gitignore file is. I would personally commit the .gitignore **independently** from the commit that implements your feature. The gitignore has nothing to do with the feature and the history should reflect that this was a change completely unrelated to it. Your commit history should tell anyone who's looking at it how the codebase has evolved over time, and adding two unrelated changes into a single commit hides certain details that people may want to be able to find. There are other patterns for managing git and this is one of them, I won't die on this hill and neither should you. What matters most is alignment in your team.
+> Tip! If you had a `__pycache__` folder when you ran `git status` this is a good opportunity to add a .gitignore, because those are not needed in our git history. Run `echo __pycache__ > .gitignore` and re-run git status to see what's changed. You'll notice that the pycache folder is no longer there, but now the .gitignore file is. I would personally commit the .gitignore **independently** from the commit that implements your feature. The gitignore has nothing to do with the feature and the history should reflect that this was a change completely unrelated to it. Your commit history should tell anyone who's looking at it how the codebase has evolved over time, and adding two unrelated changes into a single commit hides certain details that people may want to be able to find. There are lots of patterns for managing git and this is one of them, I won't die on this hill and neither should you. What matters most is alignment in your team.
 
 Looking at the log
 
@@ -425,7 +425,7 @@ This will happen, maybe not on your first day, first week, or first month. But i
 
 So our git history looks like the git log --graph above, and you **know** it was your PR that is taking down production right now. There's probably a lot to learn from this, and you should take the time to learn, but not right now. Right now it's time to get things back to being stable. You need to _revert_ this commit.
 
-As always, changes that you want in master/main need to go through an approval/PR process. Start by createing a new branch and then lets revert:
+As always, changes that you want in master/main need to go through an approval/PR process. Start by createing a new branch and then let's revert:
 
 ``` shell
 git-intro git/main
@@ -521,4 +521,4 @@ Then push this branch, open the PR and send an @here in your slack's dev channel
 
 
 ### Concluding
-And that's the basics of git and what you need to get going. There are lots of editor integrations that can help simplify this workflow but it is absolutely worth knowing what's actually going on under the hood; knowing this will provide a solid understanding of git, help you master the more advanced commands that weren't covered in this post, help you reason about the more advanced features that you see whatever editor integration you use, and just anecdotally having a strong understanding of git has helped me troubleshoot and resolve multiple issue in my career. Last but not least, this is something you're going to use everyday for the rest of your code-writting life, you don't want it being a pain point in your workflow.
+And that's the basics of git and what you need to get going. There are lots of editor integrations that can help simplify this workflow but it is absolutely worth knowing what's actually going on under the hood; knowing this will provide a solid understanding of git, help you master the more advanced commands that weren't covered in this post, help you reason about the more advanced features that you see in whatever editor integration you use, and just anecdotally I can tell you having a strong understanding of git has helped me troubleshoot and resolve multiple issue in my career. Last but not least, this is something you're going to use everyday for the rest of your code-writting life, you don't want it being a pain point in your workflow.
