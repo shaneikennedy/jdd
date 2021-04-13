@@ -1,6 +1,6 @@
 ---
 title: Upgrade your workflow
-date: "2021-03-30T22:12:03.284Z"
+date: "2021-04-13T22:12:03.284Z"
 description: "Some tips, tricks and tools to help you speed up your workflow so you can get back focusing on your code"
 ---
 
