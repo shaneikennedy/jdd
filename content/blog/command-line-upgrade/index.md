@@ -1,16 +1,18 @@
 ---
-title: Upgrade your workflow
+title: Upgrade your command line
 date: "2021-04-13T22:12:03.284Z"
-description: "Some tips, tricks and tools to help you speed up your workflow so you can get back focusing on your code"
+description: "Some tips, tricks and tools to help you speed up your command line workflow so you can get back focusing on your code"
 ---
 
-###### Context switching in your workflow - the enemy
+#### Context switching in your workflow (the enemy)
 Imagine you're writing a function that depends on a module in another one of your company's repositories; you probably don't have jump-to-definition capabilities here in your editor, which means you need to go find this module manually on your machine (if this sounds awful, it is. Consider this before going all in on multi-repo microservices). If every time you need to do this you need to re-remember/go look up commands, or just need to type a lot of tedious ones, it can take you right out of the context that you're currently focused on: writing code. Being slow at this isn't just annoying for you, it can be mentally draining.
+
+#### The argument against speed - and why it makes no sense
+People love to talk about how "speed doesn't matter" because "my editor/workflow isn't and shouldn't be the bottleneck when coding", and they're right. But no one is arguing that speed matters more than thinking about and designing your solution? Speed won't make your code better, but it does help with reducing lengthy context switching, and in general satisfaction of how you work, and this has been very important in my experience. There's nothing wrong with being new at something, but no one likes feeling like they're new.
 
 Think about anything you've ever been good at: when you started you were probably slow, maybe it felt awkward, and maybe more importantly you might have been around other people who were doing the same thing as you but much, _much_ faster. Not a great feeling. But as time went by and you got better, you got comfortable, you learned some tricks, and soon enough you were much faster than before. This is just a good feeling to have, regardless of what you're doing.
 
-People love to talk about how "speed doesn't matter" because "my editor/workflow isn't and shouldn't be the bottleneck when coding", and they're right. But no one is arguing that speed matters more than thinking about and designing your solution? Speed won't make your code better, but it does help with reducing lengthy context switching, and in general satisfaction of how you work, and this has been very important in my experience. There's nothing wrong with being new at something, but no one likes feeling like they're new.
-
+#### So let's upgrade that workflow
 So now you've just started as a junior dev, working 8-10 hours a day and you're feeling slow, awkward and uncomfortable at all the things _around_ coding; here are some tips, tricks and tools to help you get up to speed so you can focus on your code.
 
 ## Your shell
