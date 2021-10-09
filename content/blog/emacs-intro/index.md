@@ -4,6 +4,18 @@ date: "2021-10-10T22:12:03.284Z"
 description: "See why emacs users are diehards when it comes to their editor with a quick intro, guided configuration and quick start on editing in your first project."
 ---
 
+## Foreword
+There are a few reasons why you might be here reading this article
+1. You heard emacs is an editor for "Hardcore Devs" on some thread about what editor is best
+2. You know or work with an emacs user who's pretty good and think it's worth trying out
+3. You pair programmed with an emacs user who was lightning quick and his answer to "how" when you inevitably asked was "emacs"
+
+If you're here because of 1. then let me be the first to say that this article probably isn't for you. A developers choice of editor and their skill have no correlation. I know great devs who use emacs, vim, vscode and IntelliJ/jetbrains. The ability to be a good software engineer has nothing to do with your editor.
+
+In my opinion Emacs is for people who are obsessed with, or atleast firmly interested in, efficiency in their coding. Emacs is a good choice for these types of people because emacs is nearly unuseable out of the box and this forces it's users to customize it _completely_. This forceful way of making users create the experience they want is why, in my opinion, you see developers like the one mentioned above in 3.; you are forced to _really learn_ your editor, so when you find some sort of inefficiency while programming, you know how to set a keybinding, write a custom function, create a new tool, of look for an existing tool. And this tutorial is for people who identify like this.
+
+So with that out of the way, let's get started.
+
 ## What is emacs?
 
 If I had to simplify this as much as possible, I would describe emacs as a lisp interpreter with some added functionality for editing text. What do I mean by emacs being a lisp interpreter? I can open a file, write some (emacs-falvoured) lisp, and immediately evaluate it: `(message "Hello world")` ->  `M-x eval-buffer` and a "Hello world" message is logged to the \*messages\* buffer (a temporary file that's created when emacs is started for logging purposes). Emacs being a lisp interpreter is a very simple, yet powerful concept that enables extreme customizability and is why Emacs is one of the oldest editors in the programming world that has stood the test of time and is still used by many devoted fans today.
