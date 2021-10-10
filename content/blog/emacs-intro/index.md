@@ -8,7 +8,7 @@ description: "See why emacs users are diehards when it comes to their editor wit
 There are a few reasons why you might be here reading this article
 1. You heard emacs is an editor for "Hardcore Devs" on some thread about what editor is best
 2. You know or work with an emacs user who's pretty good and think it's worth trying out
-3. You pair programmed with an emacs user who was lightning quick and his answer to "how" when you inevitably asked was "emacs"
+3. You pair programmed with an emacs user who was lightning quick and their answer to "how did you ..." when you inevitably asked was: "emacs"
 
 If you're here because of 1. then let me be the first to say that this article probably isn't for you. A developers choice of editor and their skill have no correlation. I know great devs who use emacs, vim, vscode and IntelliJ/jetbrains. The ability to be a good software engineer has nothing to do with your editor.
 
@@ -18,7 +18,7 @@ So with that out of the way, let's get started.
 
 ## What is emacs?
 
-If I had to simplify this as much as possible, I would describe emacs as a lisp interpreter with some added functionality for editing text. What do I mean by emacs being a lisp interpreter? I can open a file, write some (emacs-falvoured) lisp, and immediately evaluate it: `(message "Hello world")` ->  `M-x eval-buffer` and a "Hello world" message is logged to the \*messages\* buffer (a temporary file that's created when emacs is started for logging purposes). Emacs being a lisp interpreter is a very simple, yet powerful concept that enables extreme customizability and is why Emacs is one of the oldest editors in the programming world that has stood the test of time and is still used by many devoted fans today.
+If I had to simplify this as much as possible, I would describe emacs as a lisp interpreter with some added functionality for editing text. What do I mean by emacs being a lisp interpreter? I can open a file, write some (emacs-flavoured) lisp, and immediately evaluate it: `(message "Hello world")` ->  `M-x eval-buffer` and a "Hello world" message is logged to the \*messages\* buffer (a temporary file that's created when emacs is started for logging purposes). Emacs being a lisp interpreter is a very simple, yet powerful concept that enables extreme customizability and is why Emacs is one of the oldest editors in the programming world that has stood the test of time and is still used by many devoted fans today.
 
 ## What are my basic requirements for an editor?
 
@@ -31,11 +31,12 @@ When I start hacking on a project, whether I'm starting it from scratch or I'm j
 With all that in mind let's get our first taste of emacs.
 
 ## Emacs terminology and basics for this tutorial (don't skip this!)
-- Emacs commands are executed with `C-*`, `M-*` or `C-M-*`, "C" is the control key, and "M" is the _meta_ key which is not really a key on modern keyboards anymore, but maps to the "option" key on a Mac (later we'll switch this to the "Cmd" key on Mac because I find that easier, but if you don't mind using the option key then skip that step!)
+- Emacs commands are executed with `C-*`, `M-*` or `C-M-*`, "C" is the control key, and "M" is the _meta_ key which is not really a key on modern keyboards anymore, but maps to the "option" key on a Mac (later we'll switch this to the "Cmd or Command" key on Mac because I find that easier, but if you don't mind using the option key then skip that step!)
 - Frame: what you normally call a "window" for GUI applications, basically it's one running instance of an emacs client. Each frame holds atleast one _window_
 - Buffer: used to hold the contents of files that are being visited
 - Window: the area of screen that displays a buffer
 - Copying and pasting: in emacs this is called killing and yanking, respectively, for legacy reasons that aren't important here. To copy or _kill_ a highlighted area: `M-x kill-region` and pasting or _yanking_ `C-y`.
+- If/when you get stuck in some command and you don't know how to get out of it, spam `C-g` (*This is probably the most important command in all of emacs*).
 
 ## TL;DR
 If you don’t feel like going through this tutorial step by step and just want the code, you can find it at my [emacs-light repo](https://github.com/shaneikennedy/emacs-lite.git). Follow the README there to get started.
@@ -153,7 +154,7 @@ A few more UX importvements
 
 ```
 
-One more eval-trick: highlight the code you just pasted in and run `M-x eval-region`.
+One more `eval` trick: highlight the code you just pasted in and run `M-x eval-region`.
 
 From here on out your Meta (M-*) key is now the command key (if you're on a Mac). I find this 100x better than the option key, but feel free to pick and choose from this block.
 
@@ -174,6 +175,8 @@ One final block of UX improvements that will be much appreciated, I promise.
   :bind (:map ivy-minibuffer-map))
 ```
 Highlight this region and do `M-x eval-region` again to let these changes take effect. Now hit M-x again and see that you now can see everything in emacs at your finger tips; from now on you'll be able to search and discover all of the emacs functions that you can interact with through M-x. Let's keep going.
+
+![Meta X](meta-x.png "Meta-x menu")
 
 ## Let's start with my first necessity in an editor: "_Searching/finding - I need to be able to quickly find files and/or keywords/usages in a project._"
 
@@ -198,12 +201,9 @@ For this we're going to use a mix of two packages: [projectile](https://github.c
 Highlight the region, M-x eval-region and now if you check M-x projectile- you should have a bunch of possible commands for registering projects, switching to them, finding files and searching files.
 
 
-![Doom themes](meta-x.png "Meta-x menu")
-
-
 Let's try an example `M-! git clone https://github.com/codemirror/CodeMirror.git ~/code-mirror`(Notice when you type M-! the mini buffer pops up with a shell command prompt? This is great for running quick commands). CodeMirror isn't tiny, this might take a few seconds...
 
-Now lets register CodeMirror as a project M-x projectile-add-known-project and then find the path where you just cloned the repo to (~/code-mirror if you followed the above directly).
+Now lets register CodeMirror as a project `M-x projectile-add-known-project` and then find the path where you just cloned the repo to (~/code-mirror if you followed the above directly).
 
 Now lets open the project `M-x projectile-switch-project` (Maybe open a new buffer in emacs first so you don't lose your config file, we're going to work in this project for a little bit `C-x 3` to open a window to the right). code-mirror should be the only project registered, so choose that and then you should be shown a list of files in the project that you can open; lets choose src/modes.js.
 
@@ -212,9 +212,10 @@ Projectile rapid fire:
 - *How can I register another project?* `M-x projectile-add-known-project`
 - *How can I switch to another project?* `M-x projectile-switch-project`
 - *How can I search for other files in this project?* `M-x projectile-find-file`
+- *How can I do find-and-replace in this project?* `M-x projectile-replace`
 - *How can I search for strings/words in this project?* `M-x projectile-grep` or `M-x projectile-ag` or `M-x projectile-rg` (I recommend [rg](https://github.com/BurntSushi/ripgrep) but it's seperate from emacs so you'll need to install it. If you don't want to bother with that, use projectile-grep, but grep is noticeably slow on larger projects).
 > This will open a buffer with a list of occurences which is nice, but counsel-grep/ag/rg will show you results in the minibuffer so that you can quickly see your search results without opening another window. It's excellent, I don't know of any other editor that has this.
-*How can I do find-and-replace in this project?* `M-x projectile-replace`
+
 
 > Bonus: Another gem in emacs comes from the ivy package we installed earlier for searching within a file `M-x swiper`
 
