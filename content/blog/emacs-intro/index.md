@@ -35,7 +35,7 @@ With all that in mind let's get our first taste of emacs.
 - Frame: what you normally call a "window" for GUI applications, basically it's one running instance of an emacs client. Each frame holds atleast one _window_
 - Buffer: used to hold the contents of files that are being visited
 - Window: the area of screen that displays a buffer
-- Copying and pasting: in emacs this is called killing and yanking, respectively, for legacy reasons that aren't important here. To copy or _kill_ a highlighted area: `M-x kill-region` and pasting or _yanking_ `C-y`.
+- Copying and pasting: in emacs this is called killing and yanking, respectively, for legacy reasons that aren't important here. To copy or _kill_ a highlighted area: `C-w` and pasting or _yanking_: `C-y`.
 - If/when you get stuck in some command and you don't know how to get out of it, spam `C-g` (*This is probably the most important command in all of emacs*).
 
 ## TL;DR
@@ -286,3 +286,38 @@ And there you have it, lightning speed building and testing in javascript projec
 To save this file so that emacs starts with this configuration the next time you open it hit `C-x s`.
 
 This is the bare minimum emacs configuration for what my basic needs in an editor are, but the emacs world is vast and exciting to explore. Follow some emacs-ers on github, checkout youtube, and read blog posts to see all kinds of interesting things you can do with emacs.
+
+## Appendix
+
+### Commands and keybindings
+
+These are some of my most used commands, some of them are built in to emacs and others come from the packages installed in this tutorial. If they have a default keybinding then I've listed it below but if not I've left it as N/A
+
+| Command               |      Keybinding        |  Description                                                                                                                   |
+|-----------------------|------------------------|--------------------------------------------------------------------------------------------------------------------------------|
+| swiper                | N/A                    | Search within the current buffer for a string/regex and results are dislplayed in the minibuffer                               |
+| counsel-rg            | N/A                    | Search the entire current project for a string/regex using ripgrep and results are displayed in the minibuffer                 |
+| projectfile-find-file | N/A                    | Search your current project for a filename                                                                                     |
+| ivy-switch-buffer     |`C-x b`                 | Switch to another previously opened buffer                                                                                     |
+| delete-window         |`C-x 0`                 | Delete the current window                                                                                                      |
+| delete-other-windows  |`C-x 1`                 | When you have a bunch of windows this bufferes open at once and need to just delete them all except the one you're working on  |
+| split-window-right    |`C-x 3`                 | Open a new window to the right                                                                                                 |
+| save-buffer           |`C-x s`                 | Save the contents of the buffer you're working on                                                                              |
+| comment-line          |`C-x C-;`               | Comment out the current line                                                                                                   |
+| kill-region           |`C-w`                   | Copy highlighted text                                                                                                          |
+| yank                  |`C-y`                   | Paste from clipboard                                                                                                           | 
+
+
+### Package recommendations
+A great package for learning emacs is [which-key](https://github.com/justbur/emacs-which-key). This package makes a minibuffer popup with a key map based on the last key you just pressed (i.e if there are any). Add `(use-package which-key :config (which-key-mode t))` to your config and try pressing `C-x` to see what options you have from there.
+
+[Magit](https://magit.vc/) is the best git client you can get. All other git clients should aspire to be how great Magit is. 
+
+[diff-hl](https://github.com/dgutov/diff-hl) Git diff markers in modified buffers. Nice to see which lines you've added, changed and deleted, visually.
+
+[smart-parens](https://github.com/Fuco1/smartparens) bracket/parens matching is nice
+
+
+### Doom emacs and Spacemacs
+
+[Doom emacs](https://github.com/hlissner/doom-emacs) and [Spacemacs](https://www.spacemacs.org/) are "emacs distributions": when installed you get an entirely pre-configured emacs with all of the nice bells and whistles already there for you. I personally started with spacemacs and then moved to my own emacs config later. One massive caveat for spacemacs is that it is highly intergrated with the "evil" package, which means it uses vim keybindings. While you can disable "evil-mode", the configuration will be greatly hindered without it.
