@@ -39,7 +39,7 @@ With all that in mind let's get our first taste of emacs.
 - If/when you get stuck in some command and you don't know how to get out of it, spam `C-g` (*This is probably the most important command in all of emacs*).
 
 ## TL;DR
-If you don’t feel like going through this tutorial step by step and just want the code, you can find it at my [emacs-light repo](https://github.com/shaneikennedy/emacs-lite.git). Follow the README there to get started.
+If you don’t feel like going through this tutorial step by step and just want the code, you can find it at my [emacs-light repo](https://github.com/shaneikennedy/emacs-light.git). Follow the README there to get started.
 
 ## Let's start
 
