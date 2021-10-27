@@ -59,7 +59,7 @@ Let's say we have a main branch, a "feature1" branch, and a"feature2" branch. We
 Now we can continue commiting on feature2 with the latest changes from main.
 
 ### Updating your branch using `rebase`
-To be clear, updating your feature branches using merge or rebase **accomplish the same thing**, but it works in a different way. Remember "rebase" means re-applying commit's from one branch on top of some _base_ branch. What we're going to see here using the same example from above is re-applying the commits from feature2 on top of the main branch (after merging feature1 into main).
+To be clear, updating your feature branches using merge or rebase **accomplish the same thing**, but it works in a different way. Remember "rebase" means re-applying commits from one branch on top of some _base_ branch. What we're going to see here using the same example from above is re-applying the commits from feature2 on top of the main branch (after merging feature1 into main).
 
 ###### Main branch after merging feature1
 ``` shell
@@ -70,7 +70,7 @@ To be clear, updating your feature branches using merge or rebase **accomplish t
 * 2bd5441 - (origin/main, origin/HEAD) Initial commit (4 hours ago) <some person>
 ```
 
-###### feature2 branch before merging in the main branch
+###### feature2 branch before rebasing on top of the main branch
 
 ``` shell
 * b21ccfa - (HEAD -> feature2) commit from feature2 (30 minutes ago) <some person>
@@ -90,7 +90,7 @@ To be clear, updating your feature branches using merge or rebase **accomplish t
 
 > Note that the **latest** commit in feature2 _after_ rebasing is the commit that was unique to feature2. This holds if we had multiple commits in feature2, they would all be placed *after* the "Merge branch 'feature1'..." commit
 
-It is **very important** that we notice that the commit hash from "commit from feature2" has changed after rebasing. Before the rebase, that commit had the hash b21ccfa and after the hash is a8fa9fb. This happens because a commit hash exists as a reference to changes, but remember, commits are changes _relative_ to the previous history. When we rebase, we are replacing the history of branch "feature2" with what is currently in tha "main" branch. Because this history has changed and the fact that a commit hash is a reference to changes relative to a previous history, the commit hash for "commit from feature2" **_must_** be different after rebasing.
+It is **very important** that we notice that the commit hash from "commit from feature2" has changed after rebasing. Before the rebase, that commit had the hash b21ccfa and after the hash is a8fa9fb. This happens because a commit hash exists as a reference to changes, but remember, commits are changes _relative_ to the previous history. When we rebase, we are replacing the history of branch "feature2" with what is currently in the "main" branch. Because this history has changed and the fact that a commit hash is a reference to changes relative to a previous history, the commit hash for "commit from feature2" **_must_** be different after rebasing.
 
 ### So why should I use rebase instead of merge?
 1. Cleaner git log that is easier to reason about
@@ -130,7 +130,7 @@ When you look at the changes being made in a feature branch, we typically look a
 **So why can't I just merge master into my branch often?**
 
 ### 2. Commits in PRs are only changes that you made
-When I'm reviewing your PR, I'm looking at the commits. I want to see what changes you made to the code. I do not need to see that you updated your branch with the lastest changes in main; this information is not relavent to the changes that you're trying to get in to master/main. Since PR's are relative to some target branch (usually master/main) and rebasing places your commits on top of master/main, you only see the commits for changes you made.
+When I'm reviewing your PR, I'm looking at the commits. I want to see what changes you made to the code. I do not need to see that you updated your branch with the lastest changes in main; this information is not relavent to the changes that you're trying to get in to master/main. Since PRs are relative to some target branch (usually master/main) and rebasing places your commits on top of master/main, you only see the commits for changes you made.
 
 This is from a currently open PR in apache airflow:
 
