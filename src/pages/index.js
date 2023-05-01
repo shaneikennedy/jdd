@@ -26,8 +26,10 @@ const BlogIndex = ({ data, location }) => {
     <Layout location={location} title={siteTitle}>
       <SEO title="All posts" />
       <h5>The tutorials, tips and tricks I wish I had when starting out.</h5>
-        <ul style={{ listStyle: `none` }} className="ul-grid">
-          {posts.map(post => <Card post={{post}} />)}
+      <ul style={{ listStyle: `none` }} className="ul-grid">
+        {posts.map(post => (
+          <Card post={{ post }} />
+        ))}
       </ul>
     </Layout>
   )
