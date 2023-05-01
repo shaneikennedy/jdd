@@ -331,3 +331,49 @@ a:focus {
     list-style-position: inside;
   }
 }
+
+.card {
+  width: var(--maxWidth-xs);
+  background-color: #ffffff;
+  border-radius: var(--spacing-3);
+  box-shadow: 0 var(--spacing-1) var(--spacing-2) rgba(0, 0, 0, 0.1);
+  padding: var(--spacing-6);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card-title {
+  font-size: var(--fontSize-2);
+  font-weight: bold;
+  margin-bottom: var(--spacing-5);
+  color: var(--color-primary);
+}
+
+.card-content {
+  font-size: var(--fontSize-1);
+  line-height: var(--lineHeight-normal);
+  margin-bottom: var(--spacing-5);
+}
+
+.card-image {
+  width: 100%;
+  height: auto;
+  margin-bottom: var(--spacing-5);
+}
+
+.ul-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: var(--spacing-10);
+}
+
+.link-override {
+    all: unset;
+}
+
+.link-override:hover {
+    cursor: pointer;
+}
