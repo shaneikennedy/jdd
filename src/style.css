@@ -54,12 +54,13 @@
   --fontSize-5: 2.074rem;
   --fontSize-6: 2.488rem;
   --fontSize-7: 2.986rem;
-  --color-primary: #005b99;
-  --color-text: #2e353f;
-  --color-text-light: #4f5969;
-  --color-heading: #1a202c;
+  --color-heading: #19376D;
   --color-heading-black: black;
-  --color-accent: #d1dce5;
+  --color-primary: #A5D7E8;
+  --color-background: #0B2447;
+  --color-text: #ffffff;
+  --color-text-light: #ffffff;
+  --color-accent: #576CBC;
 }
 
 /* HTML elements */
@@ -81,6 +82,7 @@ body {
   font-family: var(--font-body);
   font-size: var(--fontSize-1);
   color: var(--color-text);
+  background: var(--color-background);
 }
 
 footer {
@@ -114,13 +116,13 @@ h4,
 h5,
 h6 {
   font-weight: var(--fontWeight-bold);
-  color: var(--color-heading);
+  color: var(--color-text);
 }
 
 h1 {
   font-weight: var(--fontWeight-black);
   font-size: var(--fontSize-6);
-  color: var(--color-heading-black);
+  color: var(--color-text);
 }
 
 h2 {
@@ -334,7 +336,7 @@ a:focus {
 
 .card {
   width: var(--maxWidth-xs);
-  background-color: #ffffff;
+  background-color: var(--color-accent);
   border-radius: var(--spacing-3);
   box-shadow: 0 var(--spacing-1) var(--spacing-2) rgba(0, 0, 0, 0.1);
   padding: var(--spacing-6);
